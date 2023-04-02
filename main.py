@@ -19,20 +19,21 @@ if __name__ == '__main__':
 	# number of patterns
 	m = 3
 	# number of perturbations
-	p = 3
+	p = 18
 	# number of iterations
 	iterations = 100
-
+	# stored states
+	states = []
 
 
 
 	print('main.py is being run directly')
 
-	HopfieldN = hn.HopfieldNetwork(50,3)
+	HopfieldN = hn.HopfieldNetwork(n,m,p)
 	HopfieldN.learn(type='hebbian')
 	print(HopfieldN)
-	HopfieldN.dynamics(iterations)
-
+	states = HopfieldN.dynamics(iterations)
+	print(states)
 
 
 

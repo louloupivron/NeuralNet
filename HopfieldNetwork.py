@@ -2,6 +2,7 @@
 import numpy as np
 import random
 import HebbianLearningRule as hl
+import copy
 
 
 class HopfieldNetwork:
@@ -10,12 +11,9 @@ class HopfieldNetwork:
 
 	@staticmethod
 	def sigma(x):
-		if x >= 0:
-			return 1
-		else :
-			return -1
+		return [-1 if i<0 else 1 for i in x]
 
-	def __init__(self, n, m, p):
+	def __init__(self, n, m, p=0):
 		self.neurons = n
 		self.patterns_number = m
 		self.patterns = np.zeros((m,n))
@@ -54,7 +52,8 @@ class HopfieldNetwork:
 
 	def perturb_pattern(self, n):
 		perturbed_pattern = random.randint(0,self.patterns_number-1) # choosing a random pattern
-		arr = self.patterns[perturbed_pattern]
+		arr = np.copy(self.patterns[perturbed_pattern])
+		print(arr)
 		indices = np.random.choice(self.neurons, n, replace=False)   # choosing n random indices to perturb
 		arr[indices] *= -1
 		return arr
@@ -67,7 +66,7 @@ class HopfieldNetwork:
 		return None
 
 	def update(self, state, weights):
-		return HopfieldNetwork.sigma(np.dot(weights, state))
+		return np.asarray(HopfieldNetwork.sigma(np.dot(weights, state)))
 
 	def dynamics(self, t_max):
 		state = self.starting_pattern
