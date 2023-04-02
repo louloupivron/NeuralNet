@@ -12,9 +12,9 @@ import HebbianLearningRule as hl
 if __name__ == '__main__':
 	print('main.py is being run directly')
 
-	HopfieldN = hn.HopfieldNetwork(50,3)
-	HopfieldN.printPatterns()
+	HopfieldN = hn.HopfieldNetwork(5,3)
 	HopfieldN.learn(type='hebbian')
+	print(HopfieldN)
 
 
 
