@@ -8,11 +8,6 @@ class HebbianLearningRule :
 		self.n = patterns.shape[1]
 
 
-	def sigma(self, x):
-		if x >= 0:
-			return 1
-		else :
-			return -1
 
 	def learn(self):
 		weights = np.zeros((self.m,self.n, self.n))
